@@ -1,0 +1,26 @@
+﻿@model IEnumerable<MyCV.Models.Language>
+
+    @{
+    ViewBag.Title = "Langues";
+    }
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center m-t-lg">
+                    <h1>
+                        @ViewData["SubTitle"]
+                    </h1>
+                    <ul>
+                        @foreach (var item in @Model)
+                        {
+                        
+                        <li>@item.Langue<br />@item.Niveau</li>
+                       
+
+                        }
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,44 @@
+﻿<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span style="align-items:center;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         <img src="~/Data/Images/profile_small.jpg" width="100" height="120" />
+                    </span>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    N
+                </div>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Home" )"><i class="fa fa-info-circle" style="font-size:x-large"></i> <span class="nav-label"> A propos de moi</span> </a>
+            </li>
+            <li >
+                <a href="@Url.Action("ExpProf", "Home" )"><i class="fa fa-suitcase" style="font-size:x-large"></i> <span class="nav-label">Expérience Professionelle</span></a>
+            </li>
+            <li >
+                <a href="@Url.Action("EtudeEtDiplome", "Home" )"><i class="fa fa-mortar-board" style="font-size:x-large"></i> <span class="nav-label">Etudes et diplomes</span></a>
+            </li>
+            <li >
+                <a href="@Url.Action("Formation", "Home" )"><i class="fa fa-database" style="font-size:x-large"></i> <span class="nav-label">Formations professionnelles</span></a>
+            </li>
+            <li >
+                <a href="@Url.Action("DomaineComp", "Home" )"><i class="fa fa-code-fork" style="font-size:x-large"></i> <span class="nav-label">Domaines des compétences</span></a>
+            </li>
+            <li >
+                <a href="@Url.Action("Langues", "Home" )"><i class="fa fa-language" style="font-size:x-large"></i> <span class="nav-label">Langues</span></a>
+            </li>
+            <li >
+                <a href="@Url.Action("Divers", "Home" )"><i class="fa fa-random" style="font-size:x-large"></i> <span class="nav-label">Divers</span></a>
+            </li>
+            <li >
+                <a href="@Url.Action("ContactMe", "Home" )"><i class="fa fa-envelope-o" style="font-size:x-large"></i> <span class="nav-label">Me contacter</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
