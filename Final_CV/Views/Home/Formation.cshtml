@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Final_CV.Models.Formations>
+
+@{
+    ViewBag.Title = "Formation";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<h2>Formation</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Place)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReferenceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReferenceMail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReferencePhone)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Place)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReferenceName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReferenceMail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReferencePhone)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FormationID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.FormationID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FormationID })
+        </td>
+    </tr>
+}
+
+</table>
