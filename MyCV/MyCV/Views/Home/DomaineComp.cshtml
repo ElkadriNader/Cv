@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Inspinia_MVC5_SeedProject.Models.Skills>
+    @{
+    ViewBag.Title = "Domaines des compétences";
+    }
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center m-t-lg">
+                    <h1>
+                        @ViewData["SubTitle"]
+                    </h1>
+                    <ul>
+                        @foreach (var item in @Model)
+                        {
+                        <li>@item.SkillID</li>
+                        <li>@item.Title</li>
+                        <li>@item.Niveau</li>
+
+                        }
+
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>

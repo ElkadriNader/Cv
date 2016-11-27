@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INSPINIA | Dashboard</title>
+
+    <link href="~/Templates/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Templates/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Toastr style -->
+    <link href="~/Templates/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="~/Templates/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="~/Templates/css/animate.css" rel="stylesheet">
+    <link href="~/Templates/css/style.css" rel="stylesheet">
+
+</head>
+<body>
+    <div id="wrapper">
+
+        <nav class="navbar-default navbar-static-side" role="navigation">
+
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <span>
+                                <img alt="image" class="img-circle" src="~/Templates/img/2.jpg" width="85" height="100"/>
+                            </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold"></strong>
+                                    </span> <span class="text-muted text-xs block"> <b class="caret"></b></span>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="profile.html">Profile</a></li>
+                                <li><a href="contacts.html">Contacts</a></li>
+                                <li><a href="mailbox.html">Mailbox</a></li>
+                                <li class="divider"></li>
+                                <li><a href="login.html">Logout</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            N
+                        </div>
+                    </li>
+                    
+                    <li class="active">
+                        <a href="@Url.Action("Index", "Home")"><i class="fa fa-info-circle" style="font-size:x-large"></i> <span class="nav-label"> A propos de moi</span> </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ExpProf", "Home")"><i class="fa fa-suitcase" style="font-size:x-large"></i> <span class="nav-label">Expérience Professionelle</span></a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("EtudeEtDiplome", "Home")"><i class="fa fa-mortar-board" style="font-size:x-large"></i> <span class="nav-label">Etudes et diplomes</span></a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Formation", "Home")"><i class="fa fa-database" style="font-size:x-large"></i> <span class="nav-label">Formations professionnelles</span></a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("DomaineComp", "Home")"><i class="fa fa-code-fork" style="font-size:x-large"></i> <span class="nav-label">Domaines des compétences</span></a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Langues", "Home")"><i class="fa fa-language" style="font-size:x-large"></i> <span class="nav-label">Langues</span></a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Divers", "Home")"><i class="fa fa-random" style="font-size:x-large"></i> <span class="nav-label">Divers</span></a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ContactMe", "Home")"><i class="fa fa-envelope-o" style="font-size:x-large"></i> <span class="nav-label">Me contacter</span></a>
+                    </li>
+                   
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+           @RenderBody()
+           
+
+        </div>
+       
+    </div>
+
+    </body>
+</html>
+
