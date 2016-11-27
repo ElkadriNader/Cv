@@ -10,8 +10,11 @@ namespace Final_CV.Models
     {
         [Key]
         public int LangaugeID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public int Niveau { get; set; }
+      
         public string Logo { get; set; }
     }
 }

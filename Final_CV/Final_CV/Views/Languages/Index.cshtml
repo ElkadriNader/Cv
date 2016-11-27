@@ -16,9 +16,12 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
+            Niveau
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Logo)
         </th>
-        <th></th>
+        <th>Actions</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -27,14 +30,40 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Logo)
+            @Html.DisplayFor(modelItem =>item.Niveau)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LangaugeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LangaugeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LangaugeID })
+            @*@Html.DisplayFor(modelItem => item.Logo)*@
+            <img src="@Url.Content(item.Logo.ToString())" class="img img-circle" width="60" height="60"/>
+        </td>
+        <td>
+            <a href="@Url.Action("Edit",  new { id=item.LangaugeID })">
+                <i class="fa fa-pencil dim" style="font-size:15px;color:blue"></i>
+            </a>
+            <a href="@Url.Action("Details", new { id=item.LangaugeID })">
+                <i class="fa fa-list-alt dim" style="font-size:15px;color:green"></i>
+            </a>
+            <a href="@Url.Action("Delete", new { id=item.LangaugeID })">
+                <i class="fa fa-trash dim" style="font-size:15px;color:red"></i>
+            </a>
         </td>
     </tr>
 }
 
 </table>
+
+<link href="~/Templates/css/bootstrap.min.css" rel="stylesheet">
+<link href="~/Templates/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+<link href="~/Templates/css/animate.css" rel="stylesheet">
+
+
+
+<script src="~/Templates/js/jquery-2.1.1.js"></script>
+<script src="~/Templates/js/bootstrap.min.js"></script>
+<script src="~/Templates/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="~/Templates/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="~/Templates/js/inspinia.js"></script>
+<script src="~/Templates/js/plugins/pace/pace.min.js"></script>

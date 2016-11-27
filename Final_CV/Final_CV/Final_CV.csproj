@@ -180,6 +180,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611272028251_mig00.cs" />
+    <Compile Include="Migrations\201611272028251_mig00.Designer.cs">
+      <DependentUpon>201611272028251_mig00.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611272040586_mig001.cs" />
+    <Compile Include="Migrations\201611272040586_mig001.Designer.cs">
+      <DependentUpon>201611272040586_mig001.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Cv.cs" />
@@ -304,6 +313,14 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611272028251_mig00.resx">
+      <DependentUpon>201611272028251_mig00.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611272040586_mig001.resx">
+      <DependentUpon>201611272040586_mig001.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

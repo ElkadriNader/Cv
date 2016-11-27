@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Final_CV;
 using Final_CV.Models;
+using System.IO;
 
 namespace Final_CV.Controllers
 {
@@ -47,13 +48,25 @@ namespace Final_CV.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LangaugeID,Name,Logo")] Language language)
+        public ActionResult Create([Bind(Include = "LangaugeID,Name,Niveau,Logo")] Language language,HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                db.Languages.Add(language);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Templates/img" + "/"), fileName);
+                    language.Logo = "~/Templates/img/" + fileName;
+                    file.SaveAs(path);
+                    db.Languages.Add(language);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+            }
+            else
+            {
+                RedirectToAction("Create", "Languages");
             }
 
             return View(language);
