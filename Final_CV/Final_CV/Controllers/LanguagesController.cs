@@ -30,7 +30,7 @@ namespace Final_CV.Controllers
             var listDocs = new PagedList<Language>(listlang.ToList(), page, pageSize);
             return View(listDocs);
 
-            return View();
+           
         }
 
         // GET: Languages/Details/5

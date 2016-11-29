@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Final_CV;
 using Final_CV.Models;
+using PagedList;
 
 namespace Final_CV.Controllers
 {
@@ -16,9 +17,18 @@ namespace Final_CV.Controllers
         private DAL db = new DAL();
 
         // GET: Formations
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 4)
         {
-            return View(db.Formations.ToList());
+            var formations = db.Formations.ToList();
+            var listfor = from d in db.Formations
+                           select d;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                listfor = listfor.Where(s => s.Title.Contains(searchString));
+            }
+            var listFormations = new PagedList<Formations>(listfor.ToList(), page, pageSize);
+            return View(listFormations);
+
         }
 
         // GET: Formations/Details/5

@@ -32,6 +32,8 @@ C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\M
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\Newtonsoft.Json.dll
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\Owin.dll
+C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\PagedList.dll
+C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\PagedList.Mvc.dll
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\System.Web.Helpers.dll
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\System.Web.Mvc.dll
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\System.Web.Optimization.dll
@@ -41,6 +43,8 @@ C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\S
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\System.Web.WebPages.Razor.dll
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\WebGrease.dll
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\PagedList.xml
+C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\PagedList.Mvc.xml
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\System.Web.Helpers.xml
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\System.Web.Mvc.xml
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\System.Web.Optimization.xml
@@ -64,13 +68,9 @@ C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\M
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.csprojResolveAssemblyReference.cache
+C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.Migrations.mig00.resources
+C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.Migrations.mig001.resources
+C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.csproj.GenerateResource.Cache
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.dll
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.pdb
-C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.Migrations.mig00.resources
-C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.csproj.GenerateResource.Cache
-C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.Migrations.mig001.resources
-C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.csprojResolveAssemblyReference.cache
-C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\PagedList.dll
-C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\PagedList.Mvc.dll
-C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\PagedList.xml
-C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\PagedList.Mvc.xml
