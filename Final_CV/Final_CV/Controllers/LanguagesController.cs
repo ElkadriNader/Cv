@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Final_CV;
 using Final_CV.Models;
 using System.IO;
+using PagedList;
 
 namespace Final_CV.Controllers
 {
@@ -17,9 +18,19 @@ namespace Final_CV.Controllers
         private DAL db = new DAL();
 
         // GET: Languages
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 4)
         {
-            return View(db.Languages.ToList());
+            var langs = db.Languages.ToList();
+            var listlang= from d in db.Languages
+                          select d;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                listlang = listlang.Where(s => s.Name.Contains(searchString));
+            }
+            var listDocs = new PagedList<Language>(listlang.ToList(), page, pageSize);
+            return View(listDocs);
+
+            return View();
         }
 
         // GET: Languages/Details/5

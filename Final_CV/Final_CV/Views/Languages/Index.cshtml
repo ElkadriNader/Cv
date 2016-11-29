@@ -1,27 +1,51 @@
-﻿@model IEnumerable<Final_CV.Models.Language>
+﻿@model PagedList.IPagedList<Final_CV.Models.Language>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Langues</h2>
+@using (Html.BeginForm("Index", "Languages", FormMethod.Get))
+{
+    <div class="row">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
+        <div class="col-sm-4">
+            <a href="@Url.Action("Create", null,null)" class="btn btn-success" role="button"><i class="glyphicon glyphicon-plus-sign"></i> Ajouter une langue</a>
+        </div>
+        <div class="col-sm-4">
+
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-inline" style="text-align:right">
+                <input type="text" name="SearchString" class="form-control" placeholder="taper la langue ici ...">
+                <button type="submit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-search" style="color:blue;"></span>
+                </button>
+            </div>
+
+        </div>
+
+
+    </div>
+}
+<br />
+
+
+<table class="table table-responsive">
+    <tr class="alert alert-success" style="background-color:darkorange;">
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+          Langue
         </th>
         <th>
             Niveau
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Logo)
+           Logo
         </th>
-        <th>Actions</th>
+        <th class="pull-right">Actions</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -36,21 +60,27 @@
             @*@Html.DisplayFor(modelItem => item.Logo)*@
             <img src="@Url.Content(item.Logo.ToString())" class="img img-circle" width="60" height="60"/>
         </td>
-        <td>
+        <td class="pull-right">
             <a href="@Url.Action("Edit",  new { id=item.LangaugeID })">
-                <i class="fa fa-pencil dim" style="font-size:15px;color:blue"></i>
+                <i class="fa fa-pencil dim" style="font-size:20px;color:blue"></i>
             </a>
             <a href="@Url.Action("Details", new { id=item.LangaugeID })">
-                <i class="fa fa-list-alt dim" style="font-size:15px;color:green"></i>
+                <i class="fa fa-list-alt dim" style="font-size:20px;color:green"></i>
             </a>
             <a href="@Url.Action("Delete", new { id=item.LangaugeID })">
-                <i class="fa fa-trash dim" style="font-size:15px;color:red"></i>
+                <i class="fa fa-trash dim" style="font-size:20px;color:red"></i>
             </a>
         </td>
     </tr>
 }
 
 </table>
+<div class="pull-right">
+   
+        @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, pageSize = Model.PageSize }))
+        Consulter @Model.FirstItemOnPage jusqu'à @Model.LastItemOnPage de  @Model.TotalItemCount Langues
+    
+</div>
 
 <link href="~/Templates/css/bootstrap.min.css" rel="stylesheet">
 <link href="~/Templates/font-awesome/css/font-awesome.css" rel="stylesheet">

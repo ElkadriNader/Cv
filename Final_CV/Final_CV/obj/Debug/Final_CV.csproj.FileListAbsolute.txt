@@ -69,3 +69,8 @@ C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\D
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.Migrations.mig00.resources
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.csproj.GenerateResource.Cache
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.Migrations.mig001.resources
+C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.csprojResolveAssemblyReference.cache
+C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\PagedList.dll
+C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\PagedList.Mvc.dll
+C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\PagedList.xml
+C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\PagedList.Mvc.xml

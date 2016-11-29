@@ -13,7 +13,7 @@
               <div class="wrapper wrapper-content animated fadeInRight">
                   <div class="row">
                        @foreach (var item in Model)
-                         {
+                       {
                            <div class="col-lg-4">
                              <div class="contact-box">
                               <a href="#">
@@ -26,8 +26,28 @@
                                <div class="col-sm-8">
                                     <h3><strong>@item.Name</strong></h3>
                                      <address>
-                                        <strong>Niveau:</strong><br>
-                                         @item.Niveau<br>
+                                       
+                                        @{ float i = @item.Niveau * 25;
+                                        }
+                                             <p class="project-completion">
+                                                 <small>Niveau:@i %</small>
+                                                 <div class="progress progress-mini">
+                                                        @{
+                                                            float j =@item.Niveau *25 ;
+                                                            <div style="width:@j%;" class="progress-bar"></div>
+
+                                                        }
+
+
+
+                                                    
+                                                 </div>
+                                             </p>
+
+
+                                        
+
+                                       
                                      </address>
                                 </div>
                                 <div class="clearfix"></div>
