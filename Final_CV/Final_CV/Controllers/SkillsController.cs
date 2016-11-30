@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Final_CV;
 using Final_CV.Models;
+using System.IO;
+using PagedList;
 
 namespace Final_CV.Controllers
 {
@@ -16,9 +18,17 @@ namespace Final_CV.Controllers
         private DAL db = new DAL();
 
         // GET: Skills
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 4)
         {
-            return View(db.Skills.ToList());
+            var skils = db.Skills.ToList();
+            var listskills = from d in db.Skills
+                             select d;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                listskills = listskills.Where(s => s.Title.Contains(searchString));
+            }
+            var list = new PagedList<Skills>(listskills.ToList(), page, pageSize);
+            return View(list);
         }
 
         // GET: Skills/Details/5
@@ -47,14 +57,26 @@ namespace Final_CV.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SkillID,Title,Niveau,Logo")] Skills skills)
+        public ActionResult Create([Bind(Include = "SkillID,Title,Niveau,Logo")] Skills skills, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                db.Skills.Add(skills);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Templates/img" + "/"), fileName);
+                    skills.Logo = "~/Templates/img/" + fileName;
+                    file.SaveAs(path);
+                    db.Skills.Add(skills);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+            else
+            {
+                RedirectToAction("Create", "skills");
+            }
+
 
             return View(skills);
         }

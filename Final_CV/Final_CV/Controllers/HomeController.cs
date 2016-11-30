@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Final_CV.Models;
+using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -36,11 +38,19 @@ namespace Final_CV.Controllers
             ViewData["Message"] = "Formations";
             return View(datacv.Formations.ToList());
         }
-        public ActionResult DomaineComp()
+        public ActionResult DomaineComp(string searchString, int page = 1, int pageSize = 4)
         {
-            ViewData["SubTitle"] = "Domaines des compétences";
-            
-                return View();
+            var skils = datacv.Skills.ToList();
+            var listskills = from d in datacv.Skills
+                           select d;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                listskills = listskills.Where(s => s.Title.Contains(searchString));
+            }
+            var list = new PagedList<Skills>(listskills.ToList(), page, pageSize);
+            return View(list);
+
+           // return View(datacv.Skills.ToList());
            
         }
         public ActionResult Langues()

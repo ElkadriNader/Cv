@@ -309,6 +309,7 @@
     <Content Include="Views\Home\EtudeEtDiplome.cshtml" />
     <Content Include="Views\Home\Formation.cshtml" />
     <Content Include="Views\Home\Langues.cshtml" />
+    <Content Include="Views\Home\DomaineComp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

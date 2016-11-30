@@ -33,7 +33,8 @@
             @Html.DisplayFor(modelItem => item.Niveau)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Logo)
+            <img src="@Url.Content(item.Logo.ToString())" class="img img-circle" width="60" height="60" />
+            <img />
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.SkillID }) |
@@ -44,3 +45,42 @@
 }
 
 </table>
+
+
+<script src="~/Templates/js/jquery-2.1.1.js"></script>
+<script src="~/Templates/js/bootstrap.min.js"></script>
+<script src="~/Templates/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="~/Templates/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="~/Templates/js/inspinia.js"></script>
+<script src="~/Templates/js/plugins/pace/pace.min.js"></script>
+
+<script>
+        $(document).ready(function(){
+
+            $('#loading-example-btn').click(function () {
+                btn = $(this);
+                simpleLoad(btn, true)
+
+                // Ajax example
+//                $.ajax().always(function () {
+//                    simpleLoad($(this), false)
+//                });
+
+                simpleLoad(btn, false)
+            });
+        });
+
+        function simpleLoad(btn, state) {
+            if (state) {
+                btn.children().addClass('fa-spin');
+                btn.contents().last().replaceWith(" Loading");
+            } else {
+                setTimeout(function () {
+                    btn.children().removeClass('fa-spin');
+                    btn.contents().last().replaceWith(" Refresh");
+                }, 2000);
+            }
+        }
+</script>

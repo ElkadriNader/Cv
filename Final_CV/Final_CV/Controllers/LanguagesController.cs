@@ -73,6 +73,10 @@ namespace Final_CV.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
+                else
+                {
+                    RedirectToAction("Create", "Languages");
+                }
 
             }
             else

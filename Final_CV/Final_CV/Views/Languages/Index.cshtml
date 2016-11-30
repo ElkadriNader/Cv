@@ -98,36 +98,40 @@
 
 
 
-            <link href="~/Templates/css/bootstrap.min.css" rel="stylesheet">
-            <link href="~/Templates/font-awesome/css/font-awesome.css" rel="stylesheet">
-            <link href="~/Templates/css/animate.css" rel="stylesheet">
-            <script src="~/Templates/js/jquery-2.1.1.js"></script>
-            <script src="~/Templates/js/bootstrap.min.js"></script>
-            <script src="~/Templates/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-            <script src="~/Templates/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-            <!-- Custom and plugin javascript -->
-            <script src="~/Templates/js/inspinia.js"></script>
-            <script src="~/Templates/js/plugins/pace/pace.min.js"></script>
+       <script src="~/Templates/js/jquery-2.1.1.js"></script>
+<script src="~/Templates/js/bootstrap.min.js"></script>
+<script src="~/Templates/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="~/Templates/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-            <script>
-                $(document).ready(function () {
+<!-- Custom and plugin javascript -->
+<script src="~/Templates/js/inspinia.js"></script>
+<script src="~/Templates/js/plugins/pace/pace.min.js"></script>
 
-                    $('#loading-example-btn').click(function () {
-                        btn = $(this);
-                        simpleLoad(btn, true)
-                        simpleLoad(btn, false)
-                    });
-                });
+<script>
+        $(document).ready(function(){
 
-                function simpleLoad(btn, state) {
-                    if (state) {
-                        btn.children().addClass('fa-spin');
-                        btn.contents().last().replaceWith(" Loading");
-                    } else {
-                        setTimeout(function () {
-                            btn.children().removeClass('fa-spin');
-                            btn.contents().last().replaceWith(" Refresh");
-                        }, 2000);
-                    }
-                }
-            </script>
+            $('#loading-example-btn').click(function () {
+                btn = $(this);
+                simpleLoad(btn, true)
+
+                // Ajax example
+//                $.ajax().always(function () {
+//                    simpleLoad($(this), false)
+//                });
+
+                simpleLoad(btn, false)
+            });
+        });
+
+        function simpleLoad(btn, state) {
+            if (state) {
+                btn.children().addClass('fa-spin');
+                btn.contents().last().replaceWith(" Loading");
+            } else {
+                setTimeout(function () {
+                    btn.children().removeClass('fa-spin');
+                    btn.contents().last().replaceWith(" Refresh");
+                }, 2000);
+            }
+        }
+</script>
