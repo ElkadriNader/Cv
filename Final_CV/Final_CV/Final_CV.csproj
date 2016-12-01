@@ -310,6 +310,8 @@
     <Content Include="Views\Home\Formation.cshtml" />
     <Content Include="Views\Home\Langues.cshtml" />
     <Content Include="Views\Home\DomaineComp.cshtml" />
+    <Content Include="Views\Home\ExpProf.cshtml" />
+    <Content Include="Views\Home\ContactMe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

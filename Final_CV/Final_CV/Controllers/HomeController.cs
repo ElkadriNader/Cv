@@ -22,9 +22,9 @@ namespace Final_CV.Controllers
        
         public ActionResult ExpProf()
         {
-            ViewData["SubTitle"] = "Expérience Professionelle";
-            ViewData["Message"] = "Expérience Professionelle";
-            return View();
+            var exp = datacv.Experiences.ToList();
+          
+            return View(exp);
         }
         public ActionResult EtudeEtDiplome()
         {
@@ -68,9 +68,8 @@ namespace Final_CV.Controllers
         }
         public ActionResult ContactMe()
         {
-            ViewData["SubTitle"] = "Contacter moi";
-            ViewData["Message"] = "Contacter moi";
-            return View();
+            var data = datacv.Contacts.ToList();
+            return View(data);
         }
     }
 }

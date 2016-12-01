@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Final_CV.Models.Experience>
+
+@{
+    ViewBag.Title = "ExpProf";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+
+
+
+<div class="wrapper wrapper-content">
+    <div class="row animated fadeInRight">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Expérience professionelle</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ibox-content inspinia-timeline">
+                    @foreach (var item in Model)
+                    {
+                        <div class="timeline-item">
+                            <div class="row">
+                                <div class="col-xs-3 date">
+                                    <i class="fa fa-briefcase"></i>
+                                    @item.Year.Year
+                                    <br />
+                                    <small class="text-navy">@item.CampanyName</small><br />
+                                   
+                                </div>
+                                <div class="col-xs-7 content no-top-border">
+                                    <p class="m-b-xs"><strong>@item.Title</strong></p>
+
+                                    <p>
+                                        @item.Description<br />
+
+
+                                    </p>
+                                    <p>
+                                    <p class="text-navy">Référence</p>
+                                    <span class="glyphicon glyphicon-user">&nbsp;Nom: @item.ReferenceName</span><br />
+                                    <span class="glyphicon glyphicon-phone">&nbsp;Phone: @item.ReferenceContact</span><br />
+                                    <span class="glyphicon glyphicon-link">&nbsp;<a href="https://@item.CampanySite">@item.CampanySite</a></span>
+                                 
+
+                                    </p>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="~/Templates/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="~/Templates/css/animate.css" rel="stylesheet">
+<script src="~/Templates/js/jquery-2.1.1.js"></script>
+<script src="~/Templates/js/bootstrap.min.js"></script>
+<script src="~/Templates/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="~/Templates/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Peity -->
+<script src="~/Templates/js/plugins/peity/jquery.peity.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="~/Templates/js/inspinia.js"></script>
+<script src="~/Templates/js/plugins/pace/pace.min.js"></script>
+
+<!-- Peity -->
+<script src="~/Templates/js/demo/peity-demo.js"></script>
