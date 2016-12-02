@@ -240,6 +240,7 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Templates\img\1.jpg" />
     <Content Include="Templates\img\2.jpg" />
+    <Content Include="Templates\img\Capture.PNG" />
     <Content Include="Templates\img\logo %282%29.png" />
     <Content Include="Templates\img\logo.png" />
     <Content Include="Templates\img\profil.JPG" />
@@ -312,6 +313,8 @@
     <Content Include="Views\Home\DomaineComp.cshtml" />
     <Content Include="Views\Home\ExpProf.cshtml" />
     <Content Include="Views\Home\ContactMe.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

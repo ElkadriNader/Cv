@@ -40,67 +40,67 @@
                 </div>
             }
             <br />
-            <div class="project-list">
-                <table class="table table-responsive">
-                    <tbody>
+            <table class="table table-striped">
+                <tbody>
+                    <tr style="background-color:aquamarine;">
+                        <th>
+                            Année
+                        </th>
+                        <th>
+                            Titre
+                        </th>
+                        <th>
+                            Place
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Réference
+                        </th>
+
+                        <th>Actions</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
                         <tr>
-                            <th>
-                                Année
-                            </th>
-                            <th>
-                                Titre
-                            </th>
-                            <th>
-                                Place
-                            </th>
-                            <th>
-                                Description
-                            </th>
-                            <th>
-                               Réference
-                            </th>
-                           
-                            <th>Actions</th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Year)
+                            </td>
+                            <td style="width:180px;">
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Place)
+                            </td>
+                            <td style="width:200px;">
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReferenceName)
+                            </td>
+
+                            <td>
+                                <p class="pull-right inline">
+                                    <a class="btn btn-default btn-sm" href="@Url.Action("Edit",  new { id=item.FormationID })">
+                                        <i class="fa fa-pencil dim"></i>
+                                    </a>
+                                    <a class="btn btn-default btn-sm" href="@Url.Action("Details", new { id=item.FormationID })">
+                                        <i class="fa fa-eye dim"></i>
+                                    </a>
+                                    <a class="btn btn-default btn-sm" href="@Url.Action("Delete", new { id=item.FormationID })">
+                                        <i class="fa fa-trash dim"></i>
+                                    </a>
+                                </p>
+
+                            </td>
                         </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
 
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Year)
-                                </td>
-                                <td style="width:180px;">
-                                    @Html.DisplayFor(modelItem => item.Title)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Place)
-                                </td>
-                                <td style="width:200px;">
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ReferenceName)
-                                </td>
-                               
-                                <td>
-                                    <p class="pull-right inline">
-                                        <a class="btn btn-default btn-sm" href="@Url.Action("Edit",  new { id=item.FormationID })">
-                                            <i class="fa fa-pencil dim"></i>
-                                        </a>
-                                        <a class="btn btn-default btn-sm" href="@Url.Action("Details", new { id=item.FormationID })">
-                                            <i class="fa fa-eye dim"></i>
-                                        </a>
-                                        <a class="btn btn-default btn-sm" href="@Url.Action("Delete", new { id=item.FormationID })">
-                                            <i class="fa fa-trash dim"></i>
-                                        </a>
-                                    </p>
-
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
             <div class="pull-right">
 
                 @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, pageSize = Model.PageSize }))

@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Final_CV;
 using Final_CV.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Final_CV.Controllers
 {
@@ -18,28 +20,50 @@ namespace Final_CV.Controllers
         // GET: Cvs
         public ActionResult Index()
         {
-            return View(db.Cvs.ToList());
+            if (HttpContext.Session["LogedUserName"] != null)
+            {
+                return View(db.Cvs.ToList());
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         // GET: Cvs/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                   if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Cv cv = db.Cvs.Find(id);
+                    if (cv == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(cv);
             }
-            Cv cv = db.Cvs.Find(id);
-            if (cv == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Home");
             }
-            return View(cv);
         }
 
         // GET: Cvs/Create
         public ActionResult Create()
         {
-            return View();
+            if (HttpContext.Session["LogedUserName"] != null)
+            {
+
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         // POST: Cvs/Create
@@ -49,29 +73,47 @@ namespace Final_CV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CvID,Title,Login,Password")] Cv cv)
         {
-            if (ModelState.IsValid)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                db.Cvs.Add(cv);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            return View(cv);
+
+                if (ModelState.IsValid)
+                    {
+                       // cv.Password = this.GetMD5HashData(cv.Password);
+                        db.Cvs.Add(cv);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+                 return View(cv);
+             }
+            else
+            {
+            return RedirectToAction("NotFound", "Home");
+            }
         }
 
         // GET: Cvs/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Cv cv = db.Cvs.Find(id);
+                if (cv == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(cv);
             }
-            Cv cv = db.Cvs.Find(id);
-            if (cv == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Home");
             }
-            return View(cv);
         }
 
         // POST: Cvs/Edit/5
@@ -81,39 +123,65 @@ namespace Final_CV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CvID,Title,Login,Password")] Cv cv)
         {
-            if (ModelState.IsValid)
+
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                db.Entry(cv).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (ModelState.IsValid)
+                {
+                    db.Entry(cv).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(cv);
             }
-            return View(cv);
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         // GET: Cvs/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cv cv = db.Cvs.Find(id);
-            if (cv == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cv);
-        }
+
+                if (HttpContext.Session["LogedUserName"] != null)
+                {
+
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Cv cv = db.Cvs.Find(id);
+                    if (cv == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(cv);
+                }
+                else
+                {
+                    return RedirectToAction("NotFound", "Home");
+                }
+         }
 
         // POST: Cvs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Cv cv = db.Cvs.Find(id);
-            db.Cvs.Remove(cv);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (HttpContext.Session["LogedUserName"] != null)
+            {
+
+                Cv cv = db.Cvs.Find(id);
+                db.Cvs.Remove(cv);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -123,6 +191,28 @@ namespace Final_CV.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private string GetMD5HashData(string data)
+        {
+            //create new instance of md5
+            MD5 md5 = MD5.Create();
+
+            //convert the input text to array of bytes
+            byte[] hashData = md5.ComputeHash(Encoding.Default.GetBytes(data));
+
+            //create new instance of StringBuilder to save hashed data
+            StringBuilder returnValue = new StringBuilder();
+
+            //loop for each byte and add it to StringBuilder
+            for (int i = 0; i < hashData.Length; i++)
+            {
+                returnValue.Append(hashData[i].ToString());
+            }
+
+            // return hexadecimal string
+            return returnValue.ToString();
+
         }
     }
 }

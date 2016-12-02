@@ -22,7 +22,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,13 +38,14 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav pull-right" >
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                   
                     <li>@Html.ActionLink("Skills ", "Index", "Skills")</li>
                     <li>@Html.ActionLink("Contacts ", "Index", "Contacts")</li>
                     <li>@Html.ActionLink("Languages ", "Index", "Languages")</li>
                     <li>@Html.ActionLink("Users ", "Index", "Cvs")</li>
                     <li>@Html.ActionLink("Experience ", "Index", "Experiences")</li>
                     <li>@Html.ActionLink("Formations ", "Index", "Formations")</li>
+                    <li>@Html.ActionLink("Déconnexion", "LogOut", "Home")</li>
                 </ul>
               
             </div>
