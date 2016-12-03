@@ -7,40 +7,74 @@
 
 <h2>Langues</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Niveau)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Logo)
-        </th>
-        <th></th>
-    </tr>
+<br /><br /><br />
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Niveau)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Logo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LangaugeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LangaugeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LangaugeID })
-        </td>
-    </tr>
-}
 
-</table>
+              <div class="wrapper wrapper-content animated fadeInRight">
+                  <div class="row">
+                       @foreach (var item in Model)
+                       {
+                           <div class="col-lg-4">
+                             <div class="contact-box">
+                              <a href="#">
+                                       <div class="col-sm-4">
+                                             <div class="text-center">
+                                                 <img src="@Url.Content(item.Logo.ToString())" class="img img-circle" width="60" height="60" />
+                                             <div class="m-t-xs font-bold"></div>
+                                       </div>
+                               </div>
+                               <div class="col-sm-8">
+                                    <h3><strong>@item.Name</strong></h3>
+                                     <address>
+                                       
+                                        @{ float i = @item.Niveau * 25;
+                                        }
+                                             <p class="project-completion">
+                                                 <small>Niveau:@i %</small>
+                                                 <div class="progress progress-mini">
+                                                        @{
+                                                            float j =@item.Niveau *25 ;
+                                                            <div style="width:@j%;" class="progress-bar"></div>
+
+                                                        }
+
+
+
+                                                    
+                                                 </div>
+                                             </p>
+
+
+                                        
+
+                                       
+                                     </address>
+                                </div>
+                                <div class="clearfix"></div>
+                                </a>
+                               </div>
+                           </div>
+                             }
+                    </div>
+                </div>
+      
+  
+
+               
+
+<script src="~/Templates/js/jquery-2.1.1.js"></script>
+<script src="~/Templates/js/bootstrap.min.js"></script>
+<script src="~/Templates/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="~/Templates/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="~/Templates/js/inspinia.js"></script>
+<script src="~/Templates/js/plugins/pace/pace.min.js"></script>
+<script>
+        $(document).ready(function(){
+            $('.contact-box').each(function() {
+                animationHover(this, 'pulse');
+            });
+        });
+</script>
+                   

@@ -6,42 +6,57 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <title>INSPINIA | Dashboard</title>
+
+    <link href="~/Templates/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Templates/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Toastr style -->
+    <link href="~/Templates/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="~/Templates/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="~/Templates/css/animate.css" rel="stylesheet">
+  
 
 </head>
-<body>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-             <div class="navbar-brand">
-                 
-                         <i><strong>Cv Management</strong> </i>
-                    
-             </div>  
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav pull-right" >
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Skills ", "Index", "Skills")</li>
-                    <li>@Html.ActionLink("Contacts ", "Index", "Contacts")</li>
-                    <li>@Html.ActionLink("Languages ", "Index", "Languages")</li>
-                    <li>@Html.ActionLink("Users ", "Index", "Cvs")</li>
-                    <li>@Html.ActionLink("Experience ", "Index", "Experiences")</li>
-                    <li>@Html.ActionLink("Formations ", "Index", "Formations")</li>
-                </ul>
-              
-            </div>
-        </div>
-    </div>
+<body style="margin-left:-15px;margin-right:-15px;">
+  
     <div class="container body-content">
+        <div class="navbar navbar-inverse navbar-fixed-top pull-right">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="navbar-brand">
+
+                        <i><strong>Cv Management</strong> </i>
+
+                    </div>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav pull-right">
+
+                        <li>@Html.ActionLink("Skills ", "Index", "Skills")</li>
+                        <li>@Html.ActionLink("Contacts ", "Index", "Contacts")</li>
+                        <li>@Html.ActionLink("Languages ", "Index", "Languages")</li>
+                        @*<li>@Html.ActionLink("Users ", "Index", "Cvs")</li>*@
+                        <li>@Html.ActionLink("Experience ", "Index", "Experiences")</li>
+                        <li>@Html.ActionLink("Formations ", "Index", "Formations")</li>
+                        <li>@Html.ActionLink("Déconnexion", "LogOut", "Home")</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div><br /><br />
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Tous droits reservés- Abdelkader Nader - dévéloppé en Asp.net MVC  </p>
         </footer>
     </div>
 

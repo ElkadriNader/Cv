@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Final_CV;
 using Final_CV.Models;
+using System.IO;
+using PagedList;
 
 namespace Final_CV.Controllers
 {
@@ -16,30 +18,62 @@ namespace Final_CV.Controllers
         private DAL db = new DAL();
 
         // GET: Languages
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 4)
         {
-            return View(db.Languages.ToList());
+            if (HttpContext.Session["LogedUserName"] != null)
+            {
+                    var langs = db.Languages.ToList();
+                    var listlang= from d in db.Languages
+                                  select d;
+                    if (!String.IsNullOrEmpty(searchString))
+                    {
+                        listlang = listlang.Where(s => s.Name.Contains(searchString));
+                    }
+                    var listDocs = new PagedList<Language>(listlang.ToList(), page, pageSize);
+                    return View(listDocs);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+
+
         }
 
         // GET: Languages/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Language language = db.Languages.Find(id);
+                if (language == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(language);
             }
-            Language language = db.Languages.Find(id);
-            if (language == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Home");
             }
-            return View(language);
         }
 
         // GET: Languages/Create
         public ActionResult Create()
         {
-            return View();
+
+            if (HttpContext.Session["LogedUserName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         // POST: Languages/Create
@@ -47,31 +81,61 @@ namespace Final_CV.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LangaugeID,Name,Logo")] Language language)
+        public ActionResult Create([Bind(Include = "LangaugeID,Name,Niveau,Logo")] Language language,HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                db.Languages.Add(language);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    if (file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Templates/img" + "/"), fileName);
+                        language.Logo = "~/Templates/img/" + fileName;
+                        file.SaveAs(path);
+                        db.Languages.Add(language);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        RedirectToAction("Create", "Languages");
+                    }
+
+            }
+            else
+            {
+                RedirectToAction("Create", "Languages");
             }
 
             return View(language);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         // GET: Languages/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Language language = db.Languages.Find(id);
+                    if (language == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(language);
             }
-            Language language = db.Languages.Find(id);
-            if (language == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Home");
             }
-            return View(language);
         }
 
         // POST: Languages/Edit/5
@@ -81,28 +145,42 @@ namespace Final_CV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "LangaugeID,Name,Logo")] Language language)
         {
-            if (ModelState.IsValid)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                db.Entry(language).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(language).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(language);
             }
-            return View(language);
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         // GET: Languages/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Language language = db.Languages.Find(id);
+                if (language == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(language);
             }
-            Language language = db.Languages.Find(id);
-            if (language == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Home");
             }
-            return View(language);
         }
 
         // POST: Languages/Delete/5
@@ -110,10 +188,17 @@ namespace Final_CV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Language language = db.Languages.Find(id);
+            if (HttpContext.Session["LogedUserName"] != null)
+            {
+                Language language = db.Languages.Find(id);
             db.Languages.Remove(language);
             db.SaveChanges();
             return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Final_CV;
 using Final_CV.Models;
+using PagedList;
 
 namespace Final_CV.Controllers
 {
@@ -16,30 +17,63 @@ namespace Final_CV.Controllers
         private DAL db = new DAL();
 
         // GET: Formations
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 4)
         {
-            return View(db.Formations.ToList());
+            if (HttpContext.Session["LogedUserName"] != null)
+            {
+
+                var formations = db.Formations.ToList();
+                var listfor = from d in db.Formations
+                               select d;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    listfor = listfor.Where(s => s.Title.Contains(searchString));
+                }
+                var listFormations = new PagedList<Formations>(listfor.ToList(), page, pageSize);
+                return View(listFormations);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+
+
+
         }
 
         // GET: Formations/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Formations formations = db.Formations.Find(id);
+                if (formations == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(formations);
             }
-            Formations formations = db.Formations.Find(id);
-            if (formations == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Home");
             }
-            return View(formations);
         }
 
         // GET: Formations/Create
         public ActionResult Create()
         {
-            return View();
+            if (HttpContext.Session["LogedUserName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         // POST: Formations/Create
@@ -49,7 +83,11 @@ namespace Final_CV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "FormationID,Year,Title,Place,Description,ReferenceName,ReferenceMail,ReferencePhone")] Formations formations)
         {
-            if (ModelState.IsValid)
+
+            if (HttpContext.Session["LogedUserName"] != null)
+            {
+
+                if (ModelState.IsValid)
             {
                 db.Formations.Add(formations);
                 db.SaveChanges();
@@ -57,21 +95,35 @@ namespace Final_CV.Controllers
             }
 
             return View(formations);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+
         }
 
         // GET: Formations/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Formations formations = db.Formations.Find(id);
+                if (formations == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(formations);
             }
-            Formations formations = db.Formations.Find(id);
-            if (formations == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Home");
             }
-            return View(formations);
         }
 
         // POST: Formations/Edit/5
@@ -81,28 +133,44 @@ namespace Final_CV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "FormationID,Year,Title,Place,Description,ReferenceName,ReferenceMail,ReferencePhone")] Formations formations)
         {
-            if (ModelState.IsValid)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                db.Entry(formations).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (ModelState.IsValid)
+                {
+                    db.Entry(formations).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(formations);
             }
-            return View(formations);
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+
         }
 
         // GET: Formations/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Formations formations = db.Formations.Find(id);
+                    if (formations == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(formations);
             }
-            Formations formations = db.Formations.Find(id);
-            if (formations == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Home");
             }
-            return View(formations);
         }
 
         // POST: Formations/Delete/5
@@ -110,10 +178,17 @@ namespace Final_CV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Formations formations = db.Formations.Find(id);
-            db.Formations.Remove(formations);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (HttpContext.Session["LogedUserName"] != null)
+            {
+                Formations formations = db.Formations.Find(id);
+                db.Formations.Remove(formations);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         protected override void Dispose(bool disposing)
