@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Final_CV;
 using Final_CV.Models;
+using PagedList;
 
 namespace Final_CV.Controllers
 {
@@ -18,11 +19,20 @@ namespace Final_CV.Controllers
         //
 
         // GET: Contacts
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 4)
         {
             if (HttpContext.Session["LogedUserName"] != null)
             {
-                return View(db.Contacts.ToList());
+                var contacts = db.Contacts.ToList();
+                var listcontacts = from d in db.Contacts
+                                 select d;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    listcontacts = listcontacts.Where(s => s.Label.Contains(searchString));
+                }
+                var list = new PagedList<Contact>(listcontacts.ToList(), page, pageSize);
+                return View(list);
+                
             }
             else
             {

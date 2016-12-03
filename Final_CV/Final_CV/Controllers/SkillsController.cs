@@ -20,36 +20,58 @@ namespace Final_CV.Controllers
         // GET: Skills
         public ActionResult Index(string searchString, int page = 1, int pageSize = 4)
         {
-            var skils = db.Skills.ToList();
-            var listskills = from d in db.Skills
-                             select d;
-            if (!String.IsNullOrEmpty(searchString))
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                listskills = listskills.Where(s => s.Title.Contains(searchString));
+                var skils = db.Skills.ToList();
+                var listskills = from d in db.Skills
+                                 select d;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    listskills = listskills.Where(s => s.Title.Contains(searchString));
+                }
+                var list = new PagedList<Skills>(listskills.ToList(), page, pageSize);
+                return View(list);
             }
-            var list = new PagedList<Skills>(listskills.ToList(), page, pageSize);
-            return View(list);
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         // GET: Skills/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Skills skills = db.Skills.Find(id);
+                if (skills == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(skills);
             }
-            Skills skills = db.Skills.Find(id);
-            if (skills == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Home");
             }
-            return View(skills);
         }
 
         // GET: Skills/Create
         public ActionResult Create()
         {
-            return View();
+
+            if (HttpContext.Session["LogedUserName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         // POST: Skills/Create
@@ -59,41 +81,56 @@ namespace Final_CV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "SkillID,Title,Niveau,Logo")] Skills skills, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                if (file.ContentLength > 0)
-                {
-                    var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Templates/img" + "/"), fileName);
-                    skills.Logo = "~/Templates/img/" + fileName;
-                    file.SaveAs(path);
-                    db.Skills.Add(skills);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                if (ModelState.IsValid)
+                    {
+                        if (file.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Templates/img" + "/"), fileName);
+                            skills.Logo = "~/Templates/img/" + fileName;
+                            file.SaveAs(path);
+                            db.Skills.Add(skills);
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                    }
+                    else
+                    {
+                        RedirectToAction("Create", "skills");
+                    }
+
+
+                    return View(skills);
             }
             else
             {
-                RedirectToAction("Create", "skills");
+                return RedirectToAction("NotFound", "Home");
             }
-
-
-            return View(skills);
         }
 
         // GET: Skills/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Skills skills = db.Skills.Find(id);
+                    if (skills == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(skills);
             }
-            Skills skills = db.Skills.Find(id);
-            if (skills == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Home");
             }
-            return View(skills);
         }
 
         // POST: Skills/Edit/5
@@ -103,28 +140,42 @@ namespace Final_CV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "SkillID,Title,Niveau,Logo")] Skills skills)
         {
-            if (ModelState.IsValid)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                db.Entry(skills).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(skills).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(skills);
             }
-            return View(skills);
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         // GET: Skills/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session["LogedUserName"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Skills skills = db.Skills.Find(id);
+                if (skills == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(skills);
             }
-            Skills skills = db.Skills.Find(id);
-            if (skills == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Home");
             }
-            return View(skills);
         }
 
         // POST: Skills/Delete/5
@@ -132,10 +183,18 @@ namespace Final_CV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Skills skills = db.Skills.Find(id);
-            db.Skills.Remove(skills);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (HttpContext.Session["LogedUserName"] != null)
+            {
+
+                Skills skills = db.Skills.Find(id);
+                db.Skills.Remove(skills);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
         }
 
         protected override void Dispose(bool disposing)

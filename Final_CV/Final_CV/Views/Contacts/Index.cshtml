@@ -1,46 +1,135 @@
-﻿@model IEnumerable<Final_CV.Models.Contact>
+﻿@model PagedList.IPagedList<Final_CV.Models.Contact>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInUp">
+            @using (Html.BeginForm("Index", "Contacts", FormMethod.Get))
+            {
+                <div class="row">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Label)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.value)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Logo)
-        </th>
-        <th></th>
-    </tr>
+                    <div class="col-sm-4">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Label)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.value)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Logo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ContactID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ContactID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ContactID })
-        </td>
-    </tr>
-}
+                        <a href="@Url.Action("Create", null,null)" class="btn btn-success" role="button"><i class="glyphicon glyphicon-plus-sign"></i> Add new</a>
+                    </div>
+                    <div class="col-sm-4">
 
-</table>
+                    </div>
+
+                    <div class="col-sm-4">
+
+                        <div class="form-inline" style="text-align:right">
+                            <button type="button" id="loading-example-btn" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i> Refresh</button>
+                            <input type="text" name="SearchString" class="form-control" placeholder="taper contact ici ...">
+                            <button type="submit" class="btn btn-default">
+                                <span class="glyphicon glyphicon-search" style="color:blue;"></span>
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            }
+            <br />
+
+
+            <div class="project-list">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr style="background-color:aquamarine;">
+                            <th>
+                                Label
+                            </th>
+                            <th>
+                                Valeur
+                            </th>
+
+                            <th><p class="pull-right">Actions</p></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Label)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.value)
+                                </td>
+                               
+                                <td>
+                                    <p class="pull-right">
+                                        <a class="btn btn-default btn-sm" href="@Url.Action("Edit",  new { id=item.ContactID })">
+                                            <i class="fa fa-pencil dim"></i> Editer
+                                        </a>
+                                        <a class="btn btn-default btn-sm" href="@Url.Action("Details", new { id=item.ContactID })">
+                                            <i class="fa fa-eye dim"></i> Voir
+                                        </a>
+                                        <a class="btn btn-default btn-sm" href="@Url.Action("Delete", new { id=item.ContactID })">
+                                            <i class="fa fa-trash dim"></i> Supprimer
+                                        </a>
+                                    </p>
+                                 
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div class="pull-right">
+
+                @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, pageSize = Model.PageSize }))
+                Consulter @Model.FirstItemOnPage jusqu'à @Model.LastItemOnPage de  @Model.TotalItemCount Langues
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Templates/js/jquery-2.1.1.js"></script>
+<script src="~/Templates/js/bootstrap.min.js"></script>
+<script src="~/Templates/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="~/Templates/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="~/Templates/js/inspinia.js"></script>
+<script src="~/Templates/js/plugins/pace/pace.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $('#loading-example-btn').click(function () {
+            btn = $(this);
+            simpleLoad(btn, true)
+
+            // Ajax example
+            //                $.ajax().always(function () {
+            //                    simpleLoad($(this), false)
+            //                });
+
+            simpleLoad(btn, false)
+        });
+    });
+
+    function simpleLoad(btn, state) {
+        if (state) {
+            btn.children().addClass('fa-spin');
+            btn.contents().last().replaceWith(" Loading");
+        } else {
+            setTimeout(function () {
+                btn.children().removeClass('fa-spin');
+                btn.contents().last().replaceWith(" Refresh");
+            }, 2000);
+        }
+    }
+</script>

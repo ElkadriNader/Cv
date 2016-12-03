@@ -68,9 +68,9 @@ C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\M
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.csprojResolveAssemblyReference.cache
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.Migrations.mig00.resources
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.Migrations.mig001.resources
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.csproj.GenerateResource.Cache
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.dll
 C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.pdb
+C:\Users\Abdelkader Nader\Desktop\Visual Studio Projects\Final_CV\Final_CV\obj\Debug\Final_CV.csprojResolveAssemblyReference.cache
